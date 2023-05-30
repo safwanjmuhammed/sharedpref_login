@@ -21,9 +21,7 @@ class LoginScreenState extends State<LoginScreen> {
   void saveEmail(email) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var enteredemail = prefs.setString('email', email);
-    setState(() {
-      loginstatus = true;
-    });
+    setState(() {});
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MyHomePage();
     }));
