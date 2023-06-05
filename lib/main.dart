@@ -16,13 +16,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String? value;
-  Future checkIfloggedin() async {
+  checkIfloggedin() async {
     SharedPreferences prefss = await SharedPreferences.getInstance();
     var emailgot = prefss.getString("email");
     setState(() {
       value = emailgot;
     });
-
     print(value);
   }
 
