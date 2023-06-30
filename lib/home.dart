@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sharedpref_login/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:sharedpref_login/model/photomodel.dart';
+import 'package:sharedpref_login/api_without_model.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -45,7 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    getemail();
     super.initState();
   }
 
@@ -59,26 +59,20 @@ class _MyHomePageState extends State<MyHomePage> {
               if (snapshot.hasData) {
                 data = snapshot.data!;
                 print("THEFUCKINGDATA" + data[0].url);
-                return ListV(data);
-                // return Column(
-                //   children: [
-                //     Text(texttodisplay),
-                //     Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: ElevatedButton(
-                //           onPressed: () async {
-                //             SharedPreferences pref =
-                //                 await SharedPreferences.getInstance();
-                //             pref.remove("email");
-                //             Navigator.pushReplacement(context,
-                //                 MaterialPageRoute(builder: (context) {
-                //               return LoginScreen();
-                //             }));
-                //           },
-                //           child: Text('LOGOUT')),
-                //     ),
-                //   ],
-                // );
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SecondPage()));
+                        },
+                        child: Text(
+                            'APICALL SUCCESSFULL AND PRESS TO SHOW API CALL WITHOUT MODEL')),
+                  ),
+                );
               } else {
                 (snapshot.hasError);
               }
@@ -90,13 +84,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget ListV(List<PhotoModel> data) {
-  return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-            leading: CircleAvatar(
-          backgroundImage: NetworkImage(data[index].thumbnailUrl),
-        ));
-      });
-}
